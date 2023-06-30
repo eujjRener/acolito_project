@@ -1,6 +1,8 @@
 <?php
 require_once 'config.php';
 
+//include 'style.css';
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
@@ -66,7 +68,7 @@ $result = $conn->query($sql);
 echo "<html>";
 echo "<head>";
 echo "<title>Lista de Acólitos</title>";
-echo "<link rel='stylesheet' type='text/css' href='style.css'>";
+echo "<link  rel='stylesheet' type='text/css' href='style.css'>";
 echo "</head>";
 echo "<body>";
 echo "<div class='container'>";
