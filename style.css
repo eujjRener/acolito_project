@@ -1,22 +1,36 @@
-
+/* style.css */
 
 body {
     font-family: Arial, sans-serif;
-    margin: 20px;
-}
-
-.container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 0 20px; /* Adicione um espaçamento interno às laterais */
+    margin: 0;
+    padding: 20px;
 }
 
 h1 {
-    text-align: center;
+    color: #333;
 }
 
-h2 {
-    margin-bottom: 10px;
+form {
+    margin-top: 20px;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="date"] {
+    padding: 5px;
+    width: 200px;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
 }
 
 table {
@@ -26,103 +40,34 @@ table {
 }
 
 th, td {
-    padding: 8px;
+    padding: 10px;
     text-align: left;
     border-bottom: 1px solid #ddd;
 }
 
 th {
     background-color: #f2f2f2;
-    font-weight: bold;
-}
-
-.actions {
-    display: flex;
-    justify-content: space-between;
 }
 
 .actions a {
-    text-decoration: none;
+    margin-right: 5px;
     color: #333;
-    padding: 4px 8px;
-    border-radius: 4px;
+    text-decoration: none;
 }
 
 .delete {
-    background-color: #ff8080;
+    color: #f00;
 }
 
 .edit {
-    background-color: #99ccff;
-}
-
-.add-button {
-    display: inline-block;
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    margin-top: 20px;
+    color: #00f;
 }
 
 .pdf {
-    background-color: #ffcc66;
-}
-
-form {
-    display: inline;
-    margin: 0;
-}
-
-label {
-    margin-right: 5px;
-}
-
-select {
-    padding: 4px;
-}
-
-/* Adicione as regras abaixo para tornar o site responsivo */
-
-@media (max-width: 768px) {
-    /* Aplique as alterações quando a largura da tela for menor ou igual a 768px */
-    .container {
-        padding: 0 10px; /* Reduza o espaçamento interno às laterais */
-    }
-
-    table {
-        font-size: 14px; /* Reduza o tamanho da fonte da tabela */
-    }
-
-    th, td {
-        padding: 6px; /* Reduza o espaçamento interno das células da tabela */
-    }
-
-    .add-button {
-        font-size: 14px; /* Reduza o tamanho da fonte do botão de adicionar */
-    }
-}
-
-@media (max-width: 480px) {
-    /* Aplique as alterações quando a largura da tela for menor ou igual a 480px */
-    h1 {
-        font-size: 24px; /* Reduza o tamanho da fonte do título principal */
-    }
-
-    h2 {
-        font-size: 18px; /* Reduza o tamanho da fonte do título secundário */
-    }
-
-    table {
-        font-size: 12px; /* Reduza ainda mais o tamanho da fonte da tabela */
-    }
-
-    th, td {
-        padding: 4px; /* Reduza ainda mais o espaçamento interno das células da tabela */
-    }
-
-    .add-button {
-        font-size: 12px; /* Reduza ainda mais o tamanho da fonte do botão de adicionar */
-    }
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-top: 5px;
 }
