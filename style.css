@@ -1,73 +1,119 @@
-/* style.css */
+/* Adicione esse código ao seu arquivo style.css */
+
+* {
+    box-sizing: border-box;
+}
 
 body {
     font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
     margin: 0;
     padding: 20px;
 }
 
-h1 {
-    color: rgb(51, 51, 51);
-}
-
 form {
-    margin-top: 20px;
+    max-width: 400px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-label {
+form label {
     display: block;
-    margin-top: 10px;
+    margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="date"] {
-    padding: 5px;
-    width: 200px;
+form input[type="text"],
+form input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
 }
 
-input[type="submit"] {
+form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
     padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
     border: none;
+    border-radius: 4px;
     cursor: pointer;
+}
+
+form input[type="submit"]:hover {
+    background-color: #45a049;
 }
 
 table {
+    max-width: 600px;
     width: 100%;
+    background-color: #fff;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: 20px auto; /* Adicionado para centralizar a tabela no meio */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-th, td {
+table th,
+table td {
     padding: 10px;
     text-align: left;
+}
+
+table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+table td {
     border-bottom: 1px solid #ddd;
 }
 
-th {
-    background-color: #f2f2f2;
+table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .actions a {
-    margin-right: 5px;
-    color: #333;
+    display: inline-block;
     text-decoration: none;
-}
-
-.delete {
-    color: #f00;
-}
-
-.edit {
-    color: #00f;
-}
-
-.pdf {
-    background-color: #333;
-    color: #fff;
-    border: none;
     padding: 5px 10px;
-    cursor: pointer;
-    margin-top: 5px;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: background-color 0.3s ease;
+}
+
+.actions a.delete {
+    background-color: #FF4136;
+    color: white;
+}
+
+.actions a.edit {
+    background-color: #0074D9;
+    color: white;
+}
+
+.actions a:hover {
+    background-color: #888888;
+}
+
+.add-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background-color: #45a049;
 }

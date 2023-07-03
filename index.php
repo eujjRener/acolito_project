@@ -24,17 +24,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $update_sql = "UPDATE acolitos SET nome_aco='$nome_aco', data_nasc='$data_nasc', cpf='$cpf', nome_mae='$nome_mae', tel_celular='$tel_celular', endereco='$endereco', bairro='$bairro', igreja_serve='$igreja_serve' WHERE id=$id";
 
         if ($conn->query($update_sql) === TRUE) {
-            echo "Informações do acólito atualizadas com sucesso!";
+            echo "<script>alert('Informações do acólito atualizadas com sucesso!');</script>";
         } else {
-            echo "Erro ao atualizar as informações do acólito: " . $conn->error;
+            echo "<script>alert('Erro ao atualizar as informações do acólito: " . $conn->error . "');</script>";
         }
     } else {
         $insert_sql = "INSERT INTO acolitos (nome_aco, data_nasc, cpf, nome_mae, tel_celular, endereco, bairro, igreja_serve) VALUES ('$nome_aco', '$data_nasc', '$cpf', '$nome_mae', '$tel_celular', '$endereco', '$bairro', '$igreja_serve')";
 
         if ($conn->query($insert_sql) === TRUE) {
-            echo "Acólito cadastrado com sucesso!";
+            echo "<script>alert('Acólito cadastrado com sucesso!');</script>";
         } else {
-            echo "Erro ao cadastrar o acólito: " . $conn->error;
+            echo "<script>alert('Erro ao cadastrar o acólito: " . $conn->error . "');</script>";
         }
     }
 }
@@ -46,16 +46,14 @@ if (isset($_GET["delete"])) {
     $delete_sql = "DELETE FROM acolitos WHERE id=$id";
 
     if ($conn->query($delete_sql) === TRUE) {
-        echo "Acólito deletado com sucesso!";
+        echo "<script>alert('Acólito deletado com sucesso!');</script>";
     } else {
-        echo "Erro ao deletar o acólito: " . $conn->error;
+        echo "<script>alert('Erro ao deletar o acólito: " . $conn->error . "');</script>";
     }
 }
 
-
 // Consulta dos acólitos cadastrados
 $sql = "SELECT * FROM acolitos";
-$result = $conn->query($sql);
 
 // Verifica se o filtro de igreja foi enviado
 if (isset($_GET["filtro_igreja"]) && !empty($_GET["filtro_igreja"])) {
@@ -63,10 +61,25 @@ if (isset($_GET["filtro_igreja"]) && !empty($_GET["filtro_igreja"])) {
     $sql .= " WHERE igreja_serve = '$filtro_igreja'";
 }
 
+// Verifica se o filtro de nome foi enviado
+if (isset($_GET["filtro_nome"]) && !empty($_GET["filtro_nome"])) {
+    $filtro_nome = $_GET["filtro_nome"];
+    if (strpos($sql, 'WHERE') === false) {
+        $sql .= " WHERE nome_aco LIKE '%$filtro_nome%'";
+    } else {
+        $sql .= " AND nome_aco LIKE '%$filtro_nome%'";
+    }
+}
+
 $result = $conn->query($sql);
 
 echo "<html>";
 echo "<head>";
+echo "  <script>
+function showAlert(message) {
+    alert(message);
+}
+</script>";
 echo "<title>Lista de Acólitos</title>";
 echo "<link  rel='stylesheet' type='text/css' href='style.css'>";
 echo "</head>";
@@ -74,10 +87,7 @@ echo "<body>";
 echo "<div class='container'>";
 echo "<h1>Lista de Acólitos</h1>";
 
-
-
 // Formulário de filtro de igreja
-
 echo "<form method='GET' action='index.php'>";
 echo "<label for='filtro_igreja'>Selecione a igreja:</label>";
 echo "<select id='filtro_igreja' name='filtro_igreja'>";
@@ -87,6 +97,9 @@ echo "<option value='Nossa Senhora Aparecida'>Nossa Senhora Aparecida</option>";
 echo "<option value='Bom Jesus'>Bom Jesus</option>";
 echo "<option value='São Pedro'>São Pedro</option>";
 echo "</select>";
+echo "<br> <br>";
+echo "<label for='filtro_nome'>Nome do acólito:</label>";
+echo "<input type='text' id='filtro_nome' name='filtro_nome'>";
 echo "<input type='submit' value='Filtrar'>";
 echo "</form>";
 echo "<a href='cadastro_acolito.php' class='add-button'>Adicionar novo acólito</a>";
@@ -114,8 +127,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "Nenhum acólito cadastrado.";
 }
-
-
 
 echo "</div>"; // Fechamento da div container
 echo "</body>";
