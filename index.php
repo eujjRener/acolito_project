@@ -85,7 +85,7 @@ echo "<link  rel='stylesheet' type='text/css' href='style.css'>";
 echo "</head>";
 echo "<body>";
 echo "<div class='container'>";
-echo "<h1>Lista de Acólitos</h1>";
+// echo "<h1>Lista de Acólitos</h1>";
 
 // Formulário de filtro de igreja
 echo "<form method='GET' action='index.php'>";
