@@ -21,9 +21,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
 
         // Cabeçalho do PDF
         $header = "
-            <div style='font-weight: bold; text-align: center; '>Pastoral de Acólitos</div>
-            <div style='font-weight: bold; text-align: center; '> Diocese de Franca-SP</div>
-            <div style='font-weight: bold; text-align: center; '>Paróquia São Sebastião e Santo Antônio</div>
+            <div style='font-weight: bold; text-align: center;'>Pastoral de Acólitos</div>
+            <div style='font-weight: bold; text-align: center;'>Diocese de Franca-SP</div>
+            <div style='font-weight: bold; text-align: center;'>Paróquia São Sebastião e Santo Antônio</div>
             <hr>
         ";
 
@@ -36,27 +36,37 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
 
         $acolito_info = "
             <fieldset style='background-color:#E6E6FA;'>
-                <div >Nome: $nome_aco</div>
+                <div>Nome: $nome_aco</div>
                 <div>Igreja que serve: $igreja_serve</div>
-                <div > CPF: $cpf</div>
-                <div >Telefone: $tel_celular</div>
+                <div>CPF: $cpf</div>
+                <div>Telefone: $tel_celular</div>
                 <div>Nome do responsável: $nome_mae</div>
             </fieldset>
         ";
 
         // Texto de compromisso
         $compromisso = "
-        <br> <br>
-            <div>Caro Acólito,</div>
+            <br><br>
+            <div>Caro Acólito $nome_aco,</div>
             <div>Aqui vai o texto de compromisso. Você pode adicionar seu conteúdo personalizado aqui.</div>
             <div>Atenciosamente,</div>
             <div>Coordenação</div>
-           
         ";
 
         // Rodapé do PDF
         $footer = "
-            <div>Coordenador Geral</div>
+         
+       
+        <div style='position: fixed; bottom: 60; left: 0; right: 250; text-align: center;'>Coordenador Geral</div>
+         <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 70; left: 0; right: 250;'>
+
+         <div style='position: fixed; bottom: 60; left: 250; right: 0; text-align: center;'>Vice-Coordenador</div>
+            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 70; left: 250; right: 0;'>
+
+
+            <div style='position: fixed; bottom: 0; left: 0; right: 0; text-align: center;'>Auxiliar Geral</div>
+            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 10; left: 0; right: 0;'>
+    
         ";
 
         // Criação do objeto Dompdf
@@ -85,4 +95,3 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     echo "ID do acólito não especificado.";
 }
 ?>
-
