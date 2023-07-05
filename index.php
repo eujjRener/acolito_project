@@ -1,8 +1,6 @@
 <?php
 require_once 'config.php';
 
-//include 'style.css';
-
 $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
@@ -17,11 +15,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $endereco = $_POST["endereco"];
     $bairro = $_POST["bairro"];
     $igreja_serve = $_POST["igreja_serve"];
+    $crisma = $_POST["crisma"];
+    $tel_mae = $_POST["tel_mae"];
+    $disponibilidade_servico = isset($_POST["disponibilidade"]) ? implode(", ", $_POST["disponibilidade"]) : "";
+
 
     if (isset($_POST["update"])) {
         $id = $_POST["id"];
 
-        $update_sql = "UPDATE acolitos SET nome_aco='$nome_aco', data_nasc='$data_nasc', cpf='$cpf', nome_mae='$nome_mae', tel_celular='$tel_celular', endereco='$endereco', bairro='$bairro', igreja_serve='$igreja_serve' WHERE id=$id";
+        $update_sql = "UPDATE acolitos SET nome_aco='$nome_aco', data_nasc='$data_nasc', cpf='$cpf', nome_mae='$nome_mae', tel_celular='$tel_celular', endereco='$endereco', bairro='$bairro', igreja_serve='$igreja_serve', crisma='$crisma', tel_mae='$tel_mae', disponibilidade_servico='$disponibilidade_servico' WHERE id=$id";
 
         if ($conn->query($update_sql) === TRUE) {
             echo "<script>alert('Informações do acólito atualizadas com sucesso!');</script>";
@@ -29,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script>alert('Erro ao atualizar as informações do acólito: " . $conn->error . "');</script>";
         }
     } else {
-        $insert_sql = "INSERT INTO acolitos (nome_aco, data_nasc, cpf, nome_mae, tel_celular, endereco, bairro, igreja_serve) VALUES ('$nome_aco', '$data_nasc', '$cpf', '$nome_mae', '$tel_celular', '$endereco', '$bairro', '$igreja_serve')";
+        $insert_sql = "INSERT INTO acolitos (nome_aco, data_nasc, cpf, nome_mae, tel_celular, endereco, bairro, igreja_serve, crisma, tel_mae, disponibilidade_servico) VALUES ('$nome_aco', '$data_nasc', '$cpf', '$nome_mae', '$tel_celular', '$endereco', '$bairro', '$igreja_serve', '$crisma', '$tel_mae', '$disponibilidade_servico')";
 
         if ($conn->query($insert_sql) === TRUE) {
             echo "<script>alert('Acólito cadastrado com sucesso!');</script>";
@@ -75,18 +77,14 @@ $result = $conn->query($sql);
 
 echo "<html>";
 echo "<head>";
-echo "  <script>
-function showAlert(message) {
-    alert(message);
-}
-</script>";
 echo "<title>Lista de Acólitos</title>";
-echo "<link  rel='stylesheet' type='text/css' href='style.css'>";
+echo "<link rel='stylesheet' type='text/css' href='style.css'>";
 echo "</head>";
 echo "<body>";
 echo "<div class='container'>";
-// echo "<h1>Lista de Acólitos</h1>";
+echo "<h1>Lista de Acólitos</h1>";
 
+// Formulário de filtro de igreja
 // Formulário de filtro de igreja
 echo "<form method='GET' action='index.php'>";
 echo "<label for='filtro_igreja'>Selecione a igreja:</label>";
@@ -102,22 +100,18 @@ echo "<label for='filtro_nome'>Nome do acólito:</label>";
 echo "<input type='text' id='filtro_nome' name='filtro_nome'>";
 echo "<input type='submit' value='Filtrar'>";
 echo "</form>";
-echo "<a href='cadastro_acolito.php' class='add-button'>Adicionar novo acólito</a>";
+echo "<a href='cadastrar_acolito.php' class='add-button'>Adicionar novo acólito</a>";
 
 if ($result->num_rows > 0) {
     echo "<table>";
-    echo "<tr><th>ID</th><th>Nome</th><th>Data de Nascimento</th><th>CPF</th><th>Nome da Mãe</th><th>Telefone/Celular</th><th>Endereço</th><th>Bairro</th><th>Igreja que Serve</th><th>Ações</th></tr>";
+    echo "<tr><th>Nome</th><th>Telefone</th><th>Nome da Mãe</th><th>Crisma</th><th>Igreja de Preferência</th><th>Ações</th></tr>";
 
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row["id"] . "</td>";
         echo "<td>" . $row["nome_aco"] . "</td>";
-        echo "<td>" . $row["data_nasc"] . "</td>";
-        echo "<td>" . $row["cpf"] . "</td>";
-        echo "<td>" . $row["nome_mae"] . "</td>";
         echo "<td>" . $row["tel_celular"] . "</td>";
-        echo "<td>" . $row["endereco"] . "</td>";
-        echo "<td>" . $row["bairro"] . "</td>";
+        echo "<td>" . $row["nome_mae"] . "</td>";
+        echo "<td>" . $row["crisma"] . "</td>";
         echo "<td>" . $row["igreja_serve"] . "</td>";
         echo "<td class='actions'><a href='index.php?delete=" . $row["id"] . "' class='delete'>Deletar</a> <a href='edit.php?id=" . $row["id"] . "' class='edit'>Alterar</a> <form action='gerar_pdf.php' method='post'><input type='hidden' name='id' value='" . $row["id"] . "'><input type='submit' value='Gerar PDF' name='gerar_pdf' class='pdf'></form></td>";
 

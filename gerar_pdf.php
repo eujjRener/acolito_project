@@ -29,28 +29,40 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
 
         // Informações do acólito
         $nome_aco = $row["nome_aco"];
-        $igreja_serve = $row["igreja_serve"];
-        $cpf = $row["cpf"];
         $tel_celular = $row["tel_celular"];
         $nome_mae = $row["nome_mae"];
+        $crisma = $row["crisma"];
+        $igreja_serve = $row["igreja_serve"];
+        $disponibilidade_servico = $row["disponibilidade_servico"];
 
         $acolito_info = "
             <fieldset style='background-color:#E6E6FA;'>
-                <div>Nome: $nome_aco</div>
-                <div>Igreja que serve: $igreja_serve</div>
-                <div>CPF: $cpf</div>
-                <div>Telefone: $tel_celular</div>
-                <div>Nome do responsável: $nome_mae</div>
+                <legend>Informações do Acólito</legend>
+                <div><strong>Nome:</strong> $nome_aco</div>
+                <div><strong>Telefone:</strong> $tel_celular</div>
+                <div><strong>Nome da Mãe:</strong> $nome_mae</div>
+                <div><strong>O acolito é crismado?:</strong> $crisma</div>
+                <div><strong>Igreja de Preferência:</strong> $igreja_serve</div>
+                <div><strong>Tem disponibilidade de servir em quais períodos?</strong> $disponibilidade_servico</div>
+
+
             </fieldset>
         ";
 
         // Texto de compromisso
         $compromisso = "
             <br><br>
-            <div>Caro Acólito $nome_aco,</div>
-            <div>Aqui vai o texto de compromisso. Você pode adicionar seu conteúdo personalizado aqui.</div>
-            <div>Atenciosamente,</div>
-            <div>Coordenação</div>
+            <div>Caro Acólito <strong>$nome_aco</strong>,</div>
+            <br>
+            <div>Aceita servir a santa igreja de cristo, cuidando e zelando com responsabilidade da liturgia, paramentos e objetos sagrados:(   ) SIM  /  (    ) NÃO</div>
+
+
+            <div style='position: fixed; bottom: 430; left: 0; right: 0; text-align: center;'>Eu<strong> $nome_mae</strong> Autorizo meu(minha) filho(a) a participar da pastoral de acólitos e ancilas, sabendo da possibilidade do mesmo ter que sair tarde das celebrações desacompanhado, realizar viagens (sob autorização dos pais ou responsáveis)
+             e servir durante o período da pandemia (seguindo todas as medidas preventivas de saúde e higiene).</div>
+            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 370; left: 0; right: 0;'>
+            <div style='position: fixed; bottom: 360; left: 0; right: 0; text-align: center;'>Assinatura do responsável.</div>
+   
+         
         ";
 
         // Rodapé do PDF
@@ -64,16 +76,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
             <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 70; left: 250; right: 0;'>
 
 
-            <div style='position: fixed; bottom: 0; left: 0; right: 0; text-align: center;'>Auxiliar Geral</div>
-            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 10; left: 0; right: 0;'>
+          <div style='position: fixed; bottom: 0; left: 0; right: 0; text-align: center; font-size:15px'>Bem como o Filho do homem não veio para ser servido, 
+          mas para servir, e para dar a sua vida em resgate de muitos. 
+          </div>
+          <div  style='position: fixed; bottom: -25; left: 0; right: 0; text-align: center; font-size:15px'>  Mateus 20:28</div>
     
-        ";
+        ";  
 
         // Criação do objeto Dompdf
         $dompdf = new Dompdf();
 
         // Montagem do conteúdo do PDF
-        $html = $header . $acolito_info . $compromisso . $footer;
+        $html = $header. $acolito_info . $compromisso . $footer;
 
         // Carregar o HTML para o dompdf
         $dompdf->loadHtml($html);
