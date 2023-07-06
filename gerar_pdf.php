@@ -57,10 +57,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
             <div>Aceita servir a santa igreja de cristo, cuidando e zelando com responsabilidade da liturgia, paramentos e objetos sagrados:(   ) SIM  /  (    ) NÃO</div>
 
 
-            <div style='position: fixed; bottom: 430; left: 0; right: 0; text-align: center;'>Eu<strong> $nome_mae</strong> Autorizo meu(minha) filho(a) a participar da pastoral de acólitos e ancilas, sabendo da possibilidade do mesmo ter que sair tarde das celebrações desacompanhado, realizar viagens (sob autorização dos pais ou responsáveis)
-             e servir durante o período da pandemia (seguindo todas as medidas preventivas de saúde e higiene).</div>
-            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 370; left: 0; right: 0;'>
-            <div style='position: fixed; bottom: 360; left: 0; right: 0; text-align: center;'>Assinatura do responsável.</div>
+            <div style='position: fixed; bottom: 300; left: 0; right: 0; text-align: center;'>Eu,<strong> $nome_mae</strong>, autorizo meu/minha filho(a)<strong> $nome_aco </strong>, a participar da Pastoral de Acólitos e Ancilas, ciente das seguintes condições:
+            <br><br> <br>
+            <strong> 1º Meu(minha) filho(a) poderá sair das celebrações desacompanhado(a) em horários tardios, conforme necessário.</strong>
+             <br>
+           <strong> 2º Eventuais viagens serão realizadas apenas com a devida autorização dos pais ou responsáveis legais.</strong>
+            <br><br>
+            
+            Estou ciente dos compromissos e responsabilidades associados à participação na Pastoral de Acólitos e Ancilas e confio que meu(minha) filho(a) agirá de acordo com os valores e orientações transmitidos pela pastoral e pela equipe responsável.
+            
+            Assumo a responsabilidade de informar à pastoral sobre quaisquer alterações relevantes, como mudanças de contato ou questões médicas que possam afetar a participação do meu(minha) filho(a) nas atividades.</div>
+            <hr style='border: none; border-top: 1px solid #000;; width: 30%; position: fixed; bottom: 240; left: 0; right: 0;'>
+            <div style='position: fixed; bottom: 230; left: 0; right: 0; text-align: center;'>Assinatura do responsável.</div>
    
          
         ";

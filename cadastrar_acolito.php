@@ -11,7 +11,7 @@
     <h1>Cadastro de Acólitos</h1>
     <form action="index.php" method="POST">
         <label for="nome_aco">Nome:</label>
-        <input type="text" id="nome_aco" name="nome_aco" required>
+        <input type="text" id="nome_aco" name="nome_aco" required placeholder="Nome Completo">
 
         <label for="tel_celular">Telefone/Celular:</label>
         <input type="text" id="tel_celular" name="tel_celular" required placeholder="(XX) 99999-999">
@@ -20,7 +20,7 @@
         <input type="date" id="data_nasc" name="data_nasc" required>
 
         <label for="cpf">CPF:</label>
-        <input type="text" id="cpf" name="cpf" required>
+        <input type="text" id="cpf" name="cpf" required placeholder="999.999.999-00">
 
         <label for="nome_mae">Nome da Mãe:</label>
         <input type="text" id="nome_mae" name="nome_mae" required>
@@ -29,7 +29,7 @@
         <input type="text" id="tel_mae" name="tel_mae" required placeholder="(XX) 99999-9999">
 
         <label for="endereco">Endereço:</label>
-        <input type="text" id="endereco" name="endereco" required>
+        <input type="text" id="endereco" name="endereco" required placeholder="Jardim da Teresinha nº000">
 
         <label for="bairro">Bairro:</label>
         <input type="text" id="bairro" name="bairro" required>

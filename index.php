@@ -26,7 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $update_sql = "UPDATE acolitos SET nome_aco='$nome_aco', data_nasc='$data_nasc', cpf='$cpf', nome_mae='$nome_mae', tel_celular='$tel_celular', endereco='$endereco', bairro='$bairro', igreja_serve='$igreja_serve', crisma='$crisma', tel_mae='$tel_mae', disponibilidade_servico='$disponibilidade_servico' WHERE id=$id";
 
         if ($conn->query($update_sql) === TRUE) {
-            echo "<script>alert('Informações do acólito atualizadas com sucesso!');</script>";
+            echo "<script>alert('Informações do acólito atualizadas com sucesso!'); window.location.href = 'index.php';</script>";
+
         } else {
             echo "<script>alert('Erro ao atualizar as informações do acólito: " . $conn->error . "');</script>";
         }
@@ -34,7 +35,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_sql = "INSERT INTO acolitos (nome_aco, data_nasc, cpf, nome_mae, tel_celular, endereco, bairro, igreja_serve, crisma, tel_mae, disponibilidade_servico) VALUES ('$nome_aco', '$data_nasc', '$cpf', '$nome_mae', '$tel_celular', '$endereco', '$bairro', '$igreja_serve', '$crisma', '$tel_mae', '$disponibilidade_servico')";
 
         if ($conn->query($insert_sql) === TRUE) {
-            echo "<script>alert('Acólito cadastrado com sucesso!');</script>";
+            echo "<script>alert('Acólito cadastrado com sucesso!'); window.location.href = 'index.php';</script>";
+
         } else {
             echo "<script>alert('Erro ao cadastrar o acólito: " . $conn->error . "');</script>";
         }
@@ -48,7 +50,8 @@ if (isset($_GET["delete"])) {
     $delete_sql = "DELETE FROM acolitos WHERE id=$id";
 
     if ($conn->query($delete_sql) === TRUE) {
-        echo "<script>alert('Acólito deletado com sucesso!');</script>";
+        echo "<script>alert('Acólito deletado com sucesso!'); window.location.href = 'index.php';</script>";
+
     } else {
         echo "<script>alert('Erro ao deletar o acólito: " . $conn->error . "');</script>";
     }
