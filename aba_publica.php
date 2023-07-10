@@ -1,16 +1,30 @@
 
+<?php
+
+
+session_start();
+$_SESSION['cadastro_aba_publica'] = true;
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Processar os dados do formulário aqui
+
+    // Redirecionar para o index.php após o processamento
+    header("Location: obrigado.php");
+    exit();
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html>
-
-
-
-
 <head>
     <title>Cadastro de Acólitos</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
 </head>
-
 <body>
     <h1>Cadastro de Acólitos</h1>
     <form action="index.php" method="POST">
@@ -70,8 +84,6 @@
             Não
         </label><br>
 
-       
-
         <label for="disponibilidade_servico">Disponibilidade em servir em quais períodos?</label><br>
         <label>
             <input type="checkbox" id="disponibilidade_manha" name="disponibilidade[]" value="Manhã">
@@ -100,19 +112,5 @@
 
         <input type="submit" value="Cadastrar Acólito">
     </form>
-
-
-
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Processar os dados do formulário aqui
-
-        // Redirecionar para o index.php após o processamento
-        header("Location: index.php");
-exit();
-    }
-    ?>
-
 </body>
-
 </html>

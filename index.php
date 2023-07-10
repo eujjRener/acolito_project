@@ -6,6 +6,15 @@ if ($conn->connect_error) {
     die("Falha na conexão: " . $conn->connect_error);
 }
 
+session_start(); // Inicia a sessão
+
+// Verifica se o usuário está logado como admin
+if (!isset($_SESSION['admin'])) {
+    // Redireciona para a página de login
+    header('Location: login.php');
+    exit();
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome_aco = $_POST["nome_aco"];
     $data_nasc = $_POST["data_nasc"];
@@ -19,7 +28,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $tel_mae = $_POST["tel_mae"];
     $disponibilidade_servico = isset($_POST["disponibilidade"]) ? implode(", ", $_POST["disponibilidade"]) : "";
 
-
     if (isset($_POST["update"])) {
         $id = $_POST["id"];
 
@@ -27,7 +35,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($conn->query($update_sql) === TRUE) {
             echo "<script>alert('Informações do acólito atualizadas com sucesso!'); window.location.href = 'index.php';</script>";
-
         } else {
             echo "<script>alert('Erro ao atualizar as informações do acólito: " . $conn->error . "');</script>";
         }
@@ -35,8 +42,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $insert_sql = "INSERT INTO acolitos (nome_aco, data_nasc, cpf, nome_mae, tel_celular, endereco, bairro, igreja_serve, crisma, tel_mae, disponibilidade_servico) VALUES ('$nome_aco', '$data_nasc', '$cpf', '$nome_mae', '$tel_celular', '$endereco', '$bairro', '$igreja_serve', '$crisma', '$tel_mae', '$disponibilidade_servico')";
 
         if ($conn->query($insert_sql) === TRUE) {
-            echo "<script>alert('Acólito cadastrado com sucesso!'); window.location.href = 'index.php';</script>";
-
+            if (isset($_SESSION['cadastro_aba_publica']) && $_SESSION['cadastro_aba_publica'] === true) {
+                unset($_SESSION['cadastro_aba_publica']);
+                $nome_acolito = $_POST["nome_aco"];
+                header("Location: obrigado.php?nome=$nome_acolito");
+                exit();
+            } else {
+                header("Location: index.php");
+                exit();
+            }
         } else {
             echo "<script>alert('Erro ao cadastrar o acólito: " . $conn->error . "');</script>";
         }
@@ -51,7 +65,6 @@ if (isset($_GET["delete"])) {
 
     if ($conn->query($delete_sql) === TRUE) {
         echo "<script>alert('Acólito deletado com sucesso!'); window.location.href = 'index.php';</script>";
-
     } else {
         echo "<script>alert('Erro ao deletar o acólito: " . $conn->error . "');</script>";
     }
@@ -75,6 +88,8 @@ if (isset($_GET["filtro_nome"]) && !empty($_GET["filtro_nome"])) {
         $sql .= " AND nome_aco LIKE '%$filtro_nome%'";
     }
 }
+
+
 
 $result = $conn->query($sql);
 
