@@ -1,5 +1,4 @@
 /* Adicione esse código ao seu arquivo style.css */
-
 * {
     box-sizing: border-box;
 }
@@ -26,7 +25,8 @@ form label {
 }
 
 form input[type="text"],
-form input[type="date"] {
+form input[type="date"],
+form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
@@ -116,4 +116,10 @@ table tr:hover {
 
 .add-button:hover {
     background-color: #45a049;
+}
+
+@media (max-width: 720px) {
+    form {
+        max-width: 100%;
+    }
 }

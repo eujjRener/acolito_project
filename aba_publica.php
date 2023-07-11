@@ -1,22 +1,39 @@
-
 <?php
+require_once 'config.php';
 
+$conn = new mysqli($servername, $username, $password, $dbname);
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
+}
 
 session_start();
 $_SESSION['cadastro_aba_publica'] = true;
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Processar os dados do formulário aqui
+    $nome_aco = $_POST["nome_aco"];
+    $tel_celular = $_POST["tel_celular"];
+    $data_nasc = $_POST["data_nasc"];
+    $cpf = $_POST["cpf"];
+    $nome_mae = $_POST["nome_mae"];
+    $tel_mae = $_POST["tel_mae"];
+    $endereco = $_POST["endereco"];
+    $bairro = $_POST["bairro"];
+    $igreja_serve = $_POST["igreja_serve"];
+    $crisma = $_POST["crisma"];
+    $disponibilidade_servico = isset($_POST["disponibilidade"]) ? implode(", ", $_POST["disponibilidade"]) : "";
 
-    // Redirecionar para o index.php após o processamento
-    header("Location: obrigado.php");
-    exit();
+    $insert_sql = "INSERT INTO acolitos (nome_aco, tel_celular, data_nasc, cpf, nome_mae, tel_mae, endereco, bairro, igreja_serve, crisma, disponibilidade_servico) VALUES ('$nome_aco', '$tel_celular', '$data_nasc', '$cpf', '$nome_mae', '$tel_mae', '$endereco', '$bairro', '$igreja_serve', '$crisma', '$disponibilidade_servico')";
+
+    if ($conn->query($insert_sql) === TRUE) {
+        $nome_acolito = $_POST["nome_aco"];
+        header("Location: obrigado.php?nome=$nome_acolito");
+        exit();
+    } else {
+        echo "Erro ao cadastrar o acólito: " . $conn->error;
+    }
 }
 ?>
-
-
-
-
 
 <!DOCTYPE html>
 <html>
@@ -24,10 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Cadastro de Acólitos</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <h1>Cadastro de Acólitos</h1>
-    <form action="index.php" method="POST">
+    <form action="aba_publica.php" method="POST">
         <label for="nome_aco">Nome:</label>
         <input type="text" id="nome_aco" name="nome_aco" required placeholder="Nome Completo">
 
@@ -53,36 +71,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="bairro" name="bairro" required>
 
         <label for="igreja_serve">Igreja que Serve:</label><br>
-        <label>
-            <input type="radio" id="matriz" name="igreja_serve" value="Matriz" required>
-            Matriz
-        </label><br>
-
-        <label>
-            <input type="radio" id="nossa_senhora_aparecida" name="igreja_serve" value="Nossa Senhora Aparecida" required>
-            Nossa Senhora Aparecida
-        </label><br>
-
-        <label>
-            <input type="radio" id="bom_jesus" name="igreja_serve" value="Bom Jesus" required>
-            Bom Jesus
-        </label><br>
-
-        <label>
-            <input type="radio" id="sao_pedro" name="igreja_serve" value="São Pedro" required>
-            São Pedro
-        </label><br>
+        <select id="igreja_serve" name="igreja_serve" required>
+            <option value="">Selecione a Igreja</option>
+            <option value="Matriz">Matriz</option>
+            <option value="Nossa Senhora Aparecida">Nossa Senhora Aparecida</option>
+            <option value="Bom Jesus">Bom Jesus</option>
+            <option value="São Pedro">São Pedro</option>
+        </select><br>
 
         <label for="crisma">O acólito é crismado?</label><br>
-        <label>
-            <input type="radio" id="crismado_sim" name="crisma" value="Sim" required>
-            Sim
-        </label><br>
-
-        <label>
-            <input type="radio" id="crismado_nao" name="crisma" value="Não" required>
-            Não
-        </label><br>
+        <select id="crisma" name="crisma" required>
+            <option value="">Selecione uma opção</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select><br>
 
         <label for="disponibilidade_servico">Disponibilidade em servir em quais períodos?</label><br>
         <label>

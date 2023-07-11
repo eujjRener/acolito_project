@@ -1,16 +1,12 @@
 
 <!DOCTYPE html>
 <html>
-
-
-
-
 <head>
     <title>Cadastro de Acólitos</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
-
 <body>
     <h1>Cadastro de Acólitos</h1>
     <form action="index.php" method="POST">
@@ -39,38 +35,20 @@
         <input type="text" id="bairro" name="bairro" required>
 
         <label for="igreja_serve">Igreja que Serve:</label><br>
-        <label>
-            <input type="radio" id="matriz" name="igreja_serve" value="Matriz" required>
-            Matriz
-        </label><br>
-
-        <label>
-            <input type="radio" id="nossa_senhora_aparecida" name="igreja_serve" value="Nossa Senhora Aparecida" required>
-            Nossa Senhora Aparecida
-        </label><br>
-
-        <label>
-            <input type="radio" id="bom_jesus" name="igreja_serve" value="Bom Jesus" required>
-            Bom Jesus
-        </label><br>
-
-        <label>
-            <input type="radio" id="sao_pedro" name="igreja_serve" value="São Pedro" required>
-            São Pedro
-        </label><br>
+        <select id="igreja_serve" name="igreja_serve" required>
+            <option value="">Selecione a Igreja</option>
+            <option value="Matriz">Matriz</option>
+            <option value="Nossa Senhora Aparecida">Nossa Senhora Aparecida</option>
+            <option value="Bom Jesus">Bom Jesus</option>
+            <option value="São Pedro">São Pedro</option>
+        </select><br>
 
         <label for="crisma">O acólito é crismado?</label><br>
-        <label>
-            <input type="radio" id="crismado_sim" name="crisma" value="Sim" required>
-            Sim
-        </label><br>
-
-        <label>
-            <input type="radio" id="crismado_nao" name="crisma" value="Não" required>
-            Não
-        </label><br>
-
-       
+        <select id="crisma" name="crisma" required>
+            <option value="">Selecione uma opção</option>
+            <option value="Sim">Sim</option>
+            <option value="Não">Não</option>
+        </select><br>
 
         <label for="disponibilidade_servico">Disponibilidade em servir em quais períodos?</label><br>
         <label>
@@ -101,18 +79,15 @@
         <input type="submit" value="Cadastrar Acólito">
     </form>
 
-
-
     <?php
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Processar os dados do formulário aqui
 
         // Redirecionar para o index.php após o processamento
         header("Location: index.php");
-exit();
+        exit();
     }
     ?>
 
 </body>
-
 </html>
